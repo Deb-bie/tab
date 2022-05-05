@@ -7,17 +7,16 @@ import 'package:tab/model/model.dart';
 import 'package:tab/services/api_services.dart';
 
 
-class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+class Phd extends StatefulWidget {
+  const Phd({ Key? key }) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Phd> createState() => _PhdState();
 }
 
-class _HomeState extends State<Home> {
+class _PhdState extends State<Phd> {
 
-  Api client = Api();
-  // USApi client = USApi();
+  PhdApi client = PhdApi();
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -27,21 +26,21 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF262AAA),
-        title: const Text("Scholarship Hub"),
+        title: const Text("Phd Scholarships"),
         centerTitle: true,
       ),
 
       body: Container(
-        child: FutureBuilder(
-          key: UniqueKey(),
-          future: client.getModel(),
-          builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
+          child: FutureBuilder(
+            key: UniqueKey(),
+            future: client.getModel(),
+            builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
               return ListView.builder(
                 itemCount: models!.length,
                 itemBuilder: (BuildContext context, index) { 
-                return tile( models[index], context ); 
+                 return tile( models[index], context ); 
                 }
               );
             }

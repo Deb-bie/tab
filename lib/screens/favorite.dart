@@ -28,5 +28,3 @@ class Favorite extends StatelessWidget {
 
 
 
-
-

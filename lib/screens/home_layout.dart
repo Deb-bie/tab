@@ -13,13 +13,13 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   // ignore: prefer_final_fields
   List _screens = const [
-    Favorite(),
     Home(),
-    Category()
+    Category(),
+    // Favorite(),
   ];
 
 
@@ -36,13 +36,13 @@ class _HomeLayoutState extends State<HomeLayout> {
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
           key: _bottomNavigationKey,
-          index: 1,
+          index: 0,
           height: 60.0,
         
           items: const <Widget>[
-            Icon(Icons.favorite, size: 30, color: Colors.white,),
             Icon(Icons.home, size: 30, color: Colors.white,),
             Icon(Icons.category, size: 30, color: Colors.white,),
+            // Icon(Icons.favorite, size: 30, color: Colors.white,),
           ],
           color: const Color(0xFF262AAA),
           animationCurve: Curves.easeInOut,
@@ -55,5 +55,3 @@ class _HomeLayoutState extends State<HomeLayout> {
       );
   }
 }
-
-  

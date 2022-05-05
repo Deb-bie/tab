@@ -7,17 +7,16 @@ import 'package:tab/model/model.dart';
 import 'package:tab/services/api_services.dart';
 
 
-class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+class College extends StatefulWidget {
+  const College({ Key? key }) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<College> createState() => _CollegeState();
 }
 
-class _HomeState extends State<Home> {
+class _CollegeState extends State<College> {
 
-  Api client = Api();
-  // USApi client = USApi();
+  CollegeApi client = CollegeApi();
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -27,7 +26,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF262AAA),
-        title: const Text("Scholarship Hub"),
+        title: const Text("College Scholarships"),
         centerTitle: true,
       ),
 
@@ -52,6 +51,6 @@ class _HomeState extends State<Home> {
           }
         ), 
       ),
-    );
+    );  
   }
 }

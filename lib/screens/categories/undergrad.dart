@@ -38,11 +38,17 @@ class _UndergradState extends State<Undergrad> {
             builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
-              return ListView.builder(
-                itemCount: models!.length,
-                itemBuilder: (BuildContext context, index) { 
-                 return tile( models[index], context ); 
-                }
+              return Scrollbar(
+                thumbVisibility: true,
+                thickness: 8.0,
+                interactive: true,
+                radius: Radius.circular(20),
+                child: ListView.builder(
+                  itemCount: models!.length,
+                  itemBuilder: (BuildContext context, index) {
+                   return tile( models[index], context );
+                  }
+                ),
               );
             }
 

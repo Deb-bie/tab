@@ -25,7 +25,7 @@ class _CollegeState extends State<College> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF262AAA),
+        backgroundColor: Colors.orange,
         title: const Text("College Scholarships"),
         centerTitle: true,
       ),
@@ -37,11 +37,17 @@ class _CollegeState extends State<College> {
           builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
-              return ListView.builder(
-                itemCount: models!.length,
-                itemBuilder: (BuildContext context, index) { 
-                return tile( models[index], context ); 
-                }
+              return Scrollbar(
+                thumbVisibility: true,
+                thickness: 8.0,
+                interactive: true,
+                radius: Radius.circular(20),
+                child: ListView.builder(
+                  itemCount: models!.length,
+                  itemBuilder: (BuildContext context, index) {
+                  return tile( models[index], context );
+                  }
+                ),
               );
             }
 

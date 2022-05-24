@@ -19,7 +19,7 @@ Widget tile(Model model, BuildContext context) {
     },
 
     child: Container(
-      margin: const EdgeInsets.all(12.0),
+      margin: const EdgeInsets.fromLTRB(12.0, 12.0, 20.0, 12.0),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: Colors.white,

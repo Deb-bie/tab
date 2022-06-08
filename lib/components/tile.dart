@@ -6,19 +6,25 @@ import 'package:tab/screens/sch_details_page.dart';
 
 Widget tile(Model model, BuildContext context) {
 
+  Size size = MediaQuery.of(context).size;
+
+  var screenSize = MediaQuery.maybeOf(context)!.size;
+
+
   return GestureDetector(
     onTap: () {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => DetailsPage(
-            model: model
+            model: model,
           )
         ),
       );
     },
 
     child: Container(
+      width: screenSize.width,
       margin: const EdgeInsets.fromLTRB(12.0, 12.0, 20.0, 12.0),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -36,7 +42,8 @@ Widget tile(Model model, BuildContext context) {
         children: [  
           Container(
             height: 100.0,
-            width: 50.0,
+            width: screenSize.width *0.12,
+            // width: 50.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -52,7 +59,8 @@ Widget tile(Model model, BuildContext context) {
             
             children: [
               Container(
-                width: 200.0,
+                // width: 200.0,
+                width: screenSize.width *0.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.0)
                 ),

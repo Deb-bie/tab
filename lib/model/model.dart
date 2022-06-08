@@ -22,7 +22,7 @@ class Model with ChangeNotifier{
   factory Model.fromJson(Map<String, dynamic> parsedJson) {
     return Model (
       // name: parsedJson['name'] as String,
-      title: parsedJson['title'],
+      title: parsedJson['title'] ,
       url: parsedJson['url'],
       image: parsedJson['image'],
       deadline: parsedJson['deadline'],

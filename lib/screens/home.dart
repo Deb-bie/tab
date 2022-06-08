@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
 
   Api client = Api();
   // USApi client = USApi();
+  // List<Model> favoriteList = models;
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -38,6 +39,7 @@ class _HomeState extends State<Home> {
           builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
+              
               return Scrollbar(
                 thumbVisibility: true,
                 thickness: 8.0,
@@ -46,7 +48,7 @@ class _HomeState extends State<Home> {
                 child: ListView.builder(
                   itemCount: models!.length,
                   itemBuilder: (BuildContext context, index) { 
-                  return tile( models[index], context ); 
+                  return tile( models[index],  context); 
                   }
                 ),
               );

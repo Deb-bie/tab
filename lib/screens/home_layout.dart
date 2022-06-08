@@ -2,7 +2,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tab/screens/category.dart';
-import 'package:tab/screens/favorite.dart';
+import 'package:tab/screens/favorites.dart';
 import 'package:tab/screens/home.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -13,10 +13,11 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   // ignore: prefer_final_fields
-  List _screens = const [
+  List _screens = [
+    Favorites(),
     Home(),
     Category(),
     // Favorite(),
@@ -36,10 +37,11 @@ class _HomeLayoutState extends State<HomeLayout> {
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
           key: _bottomNavigationKey,
-          index: 0,
+          index: 1,
           height: 60.0,
         
           items: const <Widget>[
+            Icon(Icons.favorite, size: 30, color: Colors.white,),
             Icon(Icons.home, size: 30, color: Colors.white,),
             Icon(Icons.category, size: 30, color: Colors.white,),
             // Icon(Icons.favorite, size: 30, color: Colors.white,),

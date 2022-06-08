@@ -1,6 +1,7 @@
  import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tab/model/model.dart';
 import 'package:tab/screens/splash_screen.dart';
 // import 'package:hive/hive.dart ';
 
@@ -22,6 +23,9 @@ const String ApiBox2 = "apiData2";
  const String ApiBox14 = "apiData14";
  const String ApiBox15 = "apiData15";
  const String ApiBox16 = "apiData16";
+ const String Fav = "Favorites";
+
+ List<Model> favoriteDataList = [];
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -39,6 +43,10 @@ void main() async {
   await Hive.openBox(ApiBox11);
   await Hive.openBox(ApiBox12);
   await Hive.openBox(ApiBox13);
+  await Hive.openBox(Fav);
+
+  // Hive.registerAdapter(ModelAdapter());
+
   await Hive.box(ApiBox).clear();
   await Hive.box(ApiBox2).clear();
   ErrorWidget.builder = (FlutterErrorDetails) =>
@@ -58,7 +66,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Scholarship Hub',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -17,6 +17,7 @@ class Masters extends StatefulWidget {
 class _MastersState extends State<Masters> {
 
   MastersApi client = MastersApi();
+  List<Model>? models;
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -45,7 +46,7 @@ class _MastersState extends State<Masters> {
                 child: ListView.builder(
                   itemCount: models!.length,
                   itemBuilder: (BuildContext context, index) {
-                   return tile( models[index], context );
+                   return tile( models[index], context);
                   }
                 ),
               );
@@ -60,3 +61,6 @@ class _MastersState extends State<Masters> {
     );
   }
 }
+
+
+

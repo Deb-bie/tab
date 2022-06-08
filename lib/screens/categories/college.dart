@@ -45,7 +45,7 @@ class _CollegeState extends State<College> {
                 child: ListView.builder(
                   itemCount: models!.length,
                   itemBuilder: (BuildContext context, index) {
-                  return tile( models[index], context );
+                  return tile( models[index], context);
                   }
                 ),
               );

@@ -1,13 +1,36 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_unnecessary_containers, dead_code, prefer_const_constructors
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:tab/main.dart';
 import 'package:tab/model/model.dart';
+import 'package:tab/screens/home.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../components/tile.dart';
 
-class DetailsPage extends StatelessWidget {
+
+class DetailsPage extends StatefulWidget {
+
   final Model model;
+  // bool isFav= false;
+
+  // ignore: non_constant_identifier_names
   
+
   DetailsPage({Key? key, required this.model}) : super(key: key);
+
+  @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
+  bool isFav = true;
+  late final Model model;
+  // late final List<Model> models = [];
+
+
    _launchURL(url) async {
     // var urls = article.url;
     if (await canLaunch(url)) {
@@ -24,10 +47,12 @@ class DetailsPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
+    var screenSize = MediaQuery.maybeOf(context)!.size;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(model.title),
+        title: Text(widget.model.title),
         backgroundColor: const Color(0xFF262AAA),
       ),
 
@@ -44,7 +69,7 @@ class DetailsPage extends StatelessWidget {
                   width: 100.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(model.image),
+                      image: NetworkImage(widget.model.image),
                       fit: BoxFit.contain
                     ),
                     borderRadius: BorderRadius.circular(12.0)
@@ -56,22 +81,235 @@ class DetailsPage extends StatelessWidget {
 
               // ignore: avoid_unnecessary_containers
               Container(
-                child: const Text(
-                  "Scholarship Information",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        "Scholarship Information",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(width: screenSize.width *0.2,),
+
+
+                    IconButton(
+                      icon: isFav ? (Icon(Icons.favorite_outline, color: Colors.red)) : (Icon(Icons.favorite, color: Colors.red,)),
+                      onPressed: () {
+                        print(widget.model);
+                        
+                        setState((){
+
+                          isFav = !isFav;
+
+
+                          // favoriteDataList.add(
+                          //   Model(
+                          //     title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc
+                          //   ),
+                          // );
+
+
+                          final posts =Model(
+                            title: widget.model.title, 
+                            url: widget.model.url, 
+                            image: widget.model.image, 
+                            deadline: widget.model.deadline, 
+                            desc: widget.model.desc
+
+                          );
+
+
+                          Hive.box(Fav).put('favoriteDataList', posts);
+
+                          //   Model(
+                          //     title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc), 
+                              
+                          //     Model( 
+                          //        title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc
+                          //     )
+                            
+                          // );
+
+                          //  if (!favoriteDataList.contains(models)) 
+                          //   { favoriteDataList.add(
+                          //     Model(
+                          //       title: widget.model.title, 
+                          //       url: widget.model.url, 
+                          //       image: widget.model.image, 
+                          //       deadline: widget.model.deadline, 
+                          //       desc: widget.model.desc
+                          //     ),
+                          //   );
+                          // }
+
+                          // for(int i=0; i<=favoriteDataList.length; i++){
+                          //  if(widget.model == favoriteDataList[i]){
+                          //    print(widget.model);
+                          //   // favoriteDataList.add(
+                          //   //  Model(
+                          //   //   title: widget.model.title, 
+                          //   //   url: widget.model.url, 
+                          //   //   image: widget.model.image, 
+                          //   //   deadline: widget.model.deadline, 
+                          //   //   desc: widget.model.desc
+                          //   // ),
+                          //   // ); 
+
+                          //   // do nothing
+                          // } 
+                          // else{ 
+                          //   favoriteDataList.add(
+                          //     Model(
+                          //     title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc
+                          //   ),
+                          //   ); 
+                          // }
+
+
+
+
+                          // favoriteDataList.add(
+                          //   Model(
+                          //     title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc
+                          //   ),
+                          // );
+
+
+                          // }
+
+
+                          // if  (favoriteDataList.length == null){
+                          //   favoriteDataList.add(
+                          //     Model(
+                          //       title: widget.model.title, 
+                          //       url: widget.model.url, 
+                          //       image: widget.model.image, 
+                          //       deadline: widget.model.deadline, 
+                          //       desc: widget.model.desc
+                          //     ),
+                          //   );
+                          // } else{
+                          //   // do nothing
+                          // }
+
+
+
+                          //   for(int i=1; i<=favoriteDataList.length; i++){
+                          //     if(widget.model.title != favoriteDataList[i].title){
+                          //       print(widget.model);
+                          //       favoriteDataList.add(
+                          //         Model(
+                          //           title: widget.model.title, 
+                          //           url: widget.model.url, 
+                          //           image: widget.model.image, 
+                          //           deadline: widget.model.deadline, 
+                          //           desc: widget.model.desc
+                          //         ),
+                          //       );
+                          //     }
+                          //     else {
+                          //       // do nothing
+                          //       print('false');
+                          //     }
+                          //   }
+                          // } else{
+                          //   favoriteDataList.add(
+                          //     Model(
+                          //       title: widget.model.title, 
+                          //       url: widget.model.url, 
+                          //       image: widget.model.image, 
+                          //       deadline: widget.model.deadline, 
+                          //       desc: widget.model.desc
+                          //     ),
+                          //   );
+                          // }
+
+
+                          // for(int i=0; i<=favoriteDataList.length; i++){
+                          //   if(widget.model.title != favoriteDataList[i].title){
+                          //     print(widget.model);
+                          //     favoriteDataList.add(
+                          //       Model(
+                          //         title: widget.model.title, 
+                          //         url: widget.model.url, 
+                          //         image: widget.model.image, 
+                          //         deadline: widget.model.deadline, 
+                          //         desc: widget.model.desc
+                          //       ),
+                          //     );
+                          //   }
+                          //   else {
+                          //     // do nothing
+                          //     print('false');
+                          //   }
+                          // }
+
+
+
+
+                          // favoriteDataList.add(
+                          //   Model(
+                          //     title: widget.model.title, 
+                          //     url: widget.model.url, 
+                          //     image: widget.model.image, 
+                          //     deadline: widget.model.deadline, 
+                          //     desc: widget.model.desc
+                          //   ),
+                          //   // isFav = true;
+                          // );
+
+
+
+
+
+
+
+                        });
+
+
+                        // Hive.box(Fav).put(models![index], models);
+                      }
+                    ),
+                  
+                  ],
                 ),
               ),
-              const SizedBox(height: 5.0,),
+
+              
+              const SizedBox(height: 15.0,),
               const Divider(thickness: 2.0),
-              Card(
-                elevation: 4,
-                child: Column(
+              // Card(
+                // elevation: 4,
+                // child: 
+                Column(
                   
                   children: [
-                    const SizedBox(height: 10.0), 
+                    const SizedBox(height: 20.0), 
                     Container(
                       child: const Text(
                         "Scholarship Name",
@@ -89,9 +327,9 @@ class DetailsPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                       child: Text(
-                        model.title,
+                        widget.model.title,
                         style: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400 ,
                           color: Colors.blueGrey,
                           wordSpacing: 2.0,
@@ -102,13 +340,14 @@ class DetailsPage extends StatelessWidget {
                     const SizedBox(height: 20.0),
                   ],
                 ),                 
-              ),
+              // ),
 
-              SizedBox(height: 30.0,),
+              const SizedBox(height: 30.0,),
 
-              Card(
-                elevation: 4,
-                child: Column(
+              // Card(
+                // elevation: 4,
+                // child: 
+                Column(
                   
                   children: [
                     const SizedBox(height: 10.0), 
@@ -116,7 +355,7 @@ class DetailsPage extends StatelessWidget {
                       child: const Text(
                         "Scholarship Description",
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           wordSpacing: 2.0,
                           letterSpacing: 0.5,
@@ -129,9 +368,9 @@ class DetailsPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                       child: Text(
-                        model.desc,
+                        widget.model.desc,
                         style: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400 ,
                           color: Colors.blueGrey,
                           wordSpacing: 2.0,
@@ -143,7 +382,7 @@ class DetailsPage extends StatelessWidget {
                     const SizedBox(height: 20.0),
                   ],
                 ),  
-              ),
+              // ),
 
               const SizedBox(height: 20.0),
 
@@ -152,34 +391,44 @@ class DetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20.0),
                   width: double.infinity,
                   child: Text(
-                    model.deadline,
+                    widget.model.deadline,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.red[800],
                       fontSize: 20.0,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 30.0),
       
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF262AAA),
-                ),
-                onPressed: () {
-                print('true');
-                  _launchURL(model.url);
-                },
-                child: const Text(
-                  "Link",
-                  style: TextStyle(
-                    color: Colors.yellow,
+              SizedBox(
+                height: 60,
+                width: 150,
+                
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xFF262AAA),
+                    shape: RoundedRectangleBorder( //to set border radius to button
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  ),
+                  onPressed: () {
+                  _launchURL(widget.model.url);
+                  },
+                  child: const Text(
+                    "Link",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 20.0),      
+              const SizedBox(height: 100.0),      
             ],
           ),
         ),

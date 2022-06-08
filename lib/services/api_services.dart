@@ -27,6 +27,30 @@ class Api{
   }
 }
 
+
+
+class UndergradApi{
+  final url = 'https://tab-hub.herokuapp.com/master';
+  Future<List<Model>> getModel() async {
+    final undergrad = Hive.box(ApiBox3).get('undergrad', defaultValue: []);
+    if (undergrad.isNotEmpty) {
+      List un = undergrad;
+
+      return un.map((job) => Model.fromJson(job)).toList();
+    }
+    Response res = await http.get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      List json = jsonDecode(res.body);
+      Hive.box(ApiBox3).put("undergrad", json);
+      // print(json);
+      return json.map((job) => Model.fromJson(job)).toList();
+    } else {
+      throw ("Can't get the articles");
+    }
+  }
+}
+
+
 class MastersApi{
   final url = 'https://tab-hub.herokuapp.com/master';
   Future<List<Model>> getModel() async {
@@ -48,26 +72,6 @@ class MastersApi{
 }
 
 
-
-class UndergradApi{
-  final url = 'https://tab-hub.herokuapp.com/undergrad';
-  Future<List<Model>> getModel() async {
-    final undergrad = Hive.box(ApiBox3).get('undergrad', defaultValue: []);
-    if (undergrad.isNotEmpty) {
-      List un = undergrad;
-      return un.map((job) => Model.fromJson(job)).toList();
-    }
-    Response res = await http.get(Uri.parse(url));
-    if (res.statusCode == 200) {
-      List json = jsonDecode(res.body);
-      Hive.box(ApiBox3).put("undergrad", json);
-      // print(json);
-      return json.map((job) => Model.fromJson(job)).toList();
-    } else {
-      throw ("Can't get the articles");
-    }
-  }
-}
 
 
 class PhdApi{
@@ -115,9 +119,10 @@ class DevelopingApi{
   final url = 'https://tab-hub.herokuapp.com/developing';
   Future<List<Model>> getModel() async {
     final developing = Hive.box(ApiBox6).get('developing', defaultValue: []);
-    if (developing.isNotEmpty) {
-      List de = developing;
-      return de.map((job) => Model.fromJson(job)).toList();
+    if (developing != null) {
+      List developin = developing;
+      // return developin.map((job) => Model.fromJson(job)).toList();
+       return developin.map((job) => Model.fromJson(job)).toList();
     }
     Response res = await http.get(Uri.parse(url));
     if (res.statusCode == 200) {

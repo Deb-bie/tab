@@ -7,16 +7,16 @@ import 'package:tab/model/model.dart';
 import 'package:tab/services/api_services.dart';
 
 
-class Women extends StatefulWidget {
-  const Women({ Key? key }) : super(key: key);
+class Canada extends StatefulWidget {
+  const Canada({ Key? key }) : super(key: key);
 
   @override
-  State<Women> createState() => _WomenState();
+  State<Canada> createState() => _CanadaState();
 }
 
-class _WomenState extends State<Women> {
+class _CanadaState extends State<Canada> {
 
-  WomenApi client = WomenApi();
+  CanadaApi client = CanadaApi();
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -25,8 +25,8 @@ class _WomenState extends State<Women> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: const Text("Women Scholarships"),
+        backgroundColor: Colors.blue,
+        title: const Text("Canadian Scholarships"),
         centerTitle: true,
       ),
 
@@ -44,8 +44,8 @@ class _WomenState extends State<Women> {
                 radius: Radius.circular(20),
                 child: ListView.builder(
                   itemCount: models!.length,
-                  itemBuilder: (BuildContext context, index) {
-                   return tile( models[index], context );
+                  itemBuilder: (BuildContext context, index) { 
+                   return tile( models[index], context ); 
                   }
                 ),
               );

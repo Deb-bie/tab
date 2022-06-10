@@ -7,16 +7,17 @@ import 'package:tab/model/model.dart';
 import 'package:tab/services/api_services.dart';
 
 
-class Women extends StatefulWidget {
-  const Women({ Key? key }) : super(key: key);
+class Internships extends StatefulWidget {
+  const Internships({ Key? key }) : super(key: key);
 
   @override
-  State<Women> createState() => _WomenState();
+  State<Internships> createState() => _InternshipsState();
 }
 
-class _WomenState extends State<Women> {
+class _InternshipsState extends State<Internships> {
 
-  WomenApi client = WomenApi();
+  InternshipApi client = InternshipApi();
+
 
   @override
   // ignore: use_function_type_syntax_for_parameters
@@ -25,18 +26,19 @@ class _WomenState extends State<Women> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: const Text("Women Scholarships"),
+        backgroundColor: Colors.purple,
+        title: const Text("Internships"),
         centerTitle: true,
       ),
 
       body: Container(
-          child: FutureBuilder(
-            key: UniqueKey(),
-            future: client.getModel(),
-            builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
+        child: FutureBuilder(
+          key: UniqueKey(),
+          future: client.getModel(),
+          builder: (BuildContext context, AsyncSnapshot<List<Model>> snapshot) {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
+              
               return Scrollbar(
                 // thumbVisibility: true,
                 thickness: 8.0,
@@ -44,8 +46,8 @@ class _WomenState extends State<Women> {
                 radius: Radius.circular(20),
                 child: ListView.builder(
                   itemCount: models!.length,
-                  itemBuilder: (BuildContext context, index) {
-                   return tile( models[index], context );
+                  itemBuilder: (BuildContext context, index) { 
+                  return tile( models[index],  context); 
                   }
                 ),
               );

@@ -26,7 +26,7 @@ class _DevelopingState extends State<Developing> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text("Developing Scholarships"),
+        title: const Text("Developing Countries Scholarships"),
         centerTitle: true,
       ),
 
@@ -38,7 +38,7 @@ class _DevelopingState extends State<Developing> {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
               return Scrollbar(
-                thumbVisibility: true,
+                // thumbVisibility: true,
                 thickness: 8.0,
                 interactive: true,
                 radius: Radius.circular(20),

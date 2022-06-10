@@ -38,7 +38,7 @@ class _CollegeState extends State<College> {
             if (snapshot.hasData){
               List<Model>? models = snapshot.data;
               return Scrollbar(
-                thumbVisibility: true,
+                // thumbVisibility: true,
                 thickness: 8.0,
                 interactive: true,
                 radius: Radius.circular(20),
